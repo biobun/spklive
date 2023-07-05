@@ -30,13 +30,15 @@ class KecocokanLahanController extends Controller
 
     public function create(Request $request)
     {
+        // dd($request);
         
         $kriteria = Kriteria::find($request->kriteria_id);
         $tanaman = Tanaman::find($request->tanaman_id);
         return view('kecocokans.create', [
             'kriteria' => $kriteria,
             'tanaman' => $tanaman,
-            'value' => $request->value,
+            'value' => $request->value,  
+            'kecocokan' => $request->kecocokan,      
         ]);
     }
 }
