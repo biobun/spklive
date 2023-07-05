@@ -44,6 +44,7 @@
                                 <td  class="px-6 py-4 text-center">{{ $index + 1 }}.</td>
                                 <td  class="px-6 py-4 text-left">{{ $kriteria->name }}@if($kriteria->lambang) ({{ $kriteria->lambang }})@endif
                                 </td>
+                                    
                                     @livewire('kecocokan-detail', ['tanaman_id' => $tanaman_id,'kriteria_id' =>
                                     $kriteria->id,
                                     'kecocokan' => 3], key('kecocokan-3-'.$kriteria->id))
