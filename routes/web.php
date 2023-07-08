@@ -44,8 +44,10 @@ Route::middleware('auth')->group(function () {
     })->name('kriterias.home');
     
     // Route::get('/kecocokans/create/kriteria/{kriteria_id}/tanaman/{tanaman_id}', [KecocokanLahanController::class, 'create'])->name('kecocokans.create');
-    Route::get('/kecocokans/create', [KecocokanLahanController::class, 'create'])->name('kecocokans.create');
-    Route::get('/kecocokans/{id}/edit', [KecocokanLahanController::class, 'edit'])->name('kecocokans.edit');
+    // Route::post('/kecocokans', [KecocokanLahanController::class, 'store'])->name('kecocokans.store');
+    // Route::get('/kecocokans/create', [KecocokanLahanController::class, 'create'])->name('kecocokans.create');
+    // Route::get('/kecocokans/{id}/edit', [KecocokanLahanController::class, 'edit'])->name('kecocokans.edit');
+    Route::resource('kecocokans', KecocokanLahanController::class);
     
     Route::get('/spks', function () {
         return view('spks.index');
