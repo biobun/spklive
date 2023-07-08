@@ -45,7 +45,7 @@
                     <a href="{{ route('tanamans.edit', $tanaman->id) }}" class="rounded-md bg-gray-400 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-gray-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Batal</a>
                 
                 </div>
-                </form>
+            </form>
         </div>
     </div>
 </div>

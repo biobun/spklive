@@ -142,7 +142,7 @@ class KecocokanDetail extends Component
     {
         # code...
         redirect(route('kecocokans.edit', [
-            'id' => $this->kecocokanLahan->id,
+            'kecocokan' => $this->kecocokanLahan->id,
         ]));
     }
 }

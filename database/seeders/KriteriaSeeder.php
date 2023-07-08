@@ -67,7 +67,7 @@ class KriteriaSeeder extends Seeder
         [
             'name' => 'Bahaya Banjir',
             'bobot' => 10,
-            'type_data' => 'pilihan',
+            'type_data' => 'pilihan2',
             'lambang' => '',
             'col_name' => 'bahaya_banjir',
         ]]

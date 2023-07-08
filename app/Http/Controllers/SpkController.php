@@ -15,21 +15,21 @@ use Illuminate\Http\Request;
 class SpkController extends Controller
 {
     //
-    public $arrayKriteria;
+    public $arrayBobotKriteria;
     // public $dataDrainase = Drainase::getDrainaseConstant();
     // public $dataTekstur = Tekstur::getTeksturConstant();
 
-    function setArrayKriteria(){
+    function setArrayBobotKriteria(){
         $kriterias = Kriteria::all();
-        $arrayKriteria = [];
+        $arrayBobotKriteria = [];
         foreach ($kriterias as $kriteria) {
             # code...
-            $arrayKriteria[$kriteria->col_name] = [
+            $arrayBobotKriteria[$kriteria->col_name] = [
                 'id' => $kriteria->id,
                 'bobot' => $kriteria->bobot,
             ];
         }     
-        $this->arrayKriteria = $arrayKriteria;   
+        $this->arrayBobotKriteria = $arrayBobotKriteria;   
     }
 
     public function create()
@@ -43,7 +43,7 @@ class SpkController extends Controller
     public function getNilaiKriteriaAngka($tanaman, $nilaiInput, $namaKriteria)
     {
         $nilaiOutput = 0;
-        foreach ($tanaman->kecocokans()->where('kriteria_id',$this->arrayKriteria[$namaKriteria]['id'])->orderBy('kecocokan', 'desc')
+        foreach ($tanaman->kecocokans()->where('kriteria_id',$this->arrayBobotKriteria[$namaKriteria]['id'])->orderBy('kecocokan', 'desc')
         ->get() as $kecocokanLahan) {
             $valueArray = explode(';', $kecocokanLahan->value);
             // [18, 20, 30, 35]
@@ -97,7 +97,7 @@ class SpkController extends Controller
     {
         $nilaiOutput = 0;
         // info($dataPilihan[$nilaiInput]);
-        foreach ($tanaman->kecocokans()->where('kriteria_id',$this->arrayKriteria[$namaKriteria]['id'])->orderBy('kecocokan', 'desc')
+        foreach ($tanaman->kecocokans()->where('kriteria_id',$this->arrayBobotKriteria[$namaKriteria]['id'])->orderBy('kecocokan', 'desc')
         ->get() as $kecocokanLahan) {
             $valueArray = explode(';', $kecocokanLahan->value);
             // info($valueArray);
@@ -132,7 +132,7 @@ class SpkController extends Controller
     {
         $nilaiOutput = 0;
         // info($dataPilihan[$nilaiInput]);
-        foreach ($tanaman->kecocokans()->where('kriteria_id',$this->arrayKriteria[$namaKriteria]['id'])->orderBy('kecocokan', 'desc')
+        foreach ($tanaman->kecocokans()->where('kriteria_id',$this->arrayBobotKriteria[$namaKriteria]['id'])->orderBy('kecocokan', 'desc')
         ->get() as $kecocokanLahan) {
             $value =$kecocokanLahan->value;
             // info($value);
@@ -150,7 +150,7 @@ class SpkController extends Controller
 
     public function show($id)
     {
-        $this->setArrayKriteria();
+        $this->setArrayBobotKriteria();
         $spk = inputData::where('id', $id)->first();
 
         $kriterias = Kriteria::all();
@@ -201,22 +201,26 @@ class SpkController extends Controller
 
         $arrayKriteria = ['suhu', 'kelembapan', 'drainase', 'tekstur', 'kedalaman_tanah', 'keasaman', 'lereng', 'bahaya_banjir'];
 
+        # inisialisasi array nilai maksimal kriteria
         $nilaiMaksimal = [];
-        foreach ($arrayKriteria as $value) {
-            $nilaiMaksimal[$value] = 0;
+        foreach ($arrayKriteria as $kriteria) {
+            $nilaiMaksimal[$kriteria] = 0;
         }
 
+        // suhu = 0,  kelembapan = 0
+        info($nilaiTanamans);
         foreach ($nilaiTanamans as $key => $dataNilai) {
+            info($dataNilai);
             foreach ($arrayKriteria as $namaKriteria) {
-                // info($namaKriteria);
-                $nilaiMax = $nilaiMaksimal[$namaKriteria];
-                if ($nilaiMax < $dataNilai[$namaKriteria]) {
+                info('nilai data: '.$dataNilai[$namaKriteria]);
+                info('nilai maksimal tersimpan: '.$nilaiMaksimal[$namaKriteria]);
+                if ($dataNilai[$namaKriteria] > $nilaiMaksimal[$namaKriteria]) {
                     $nilaiMaksimal[$namaKriteria] = $dataNilai[$namaKriteria];
                 }
             }
         }
 
-        // info($nilaiMaksimal);
+        info($nilaiMaksimal);
 
         $nilaiNormalisaliTanamans = [];
         foreach ($nilaiTanamans as $key => $dataNilai) {
@@ -226,40 +230,47 @@ class SpkController extends Controller
                 // info($namaKriteria);
                 $nilaiMax = $nilaiMaksimal[$namaKriteria];
                 if ($nilaiMax > 0) {
-                    $nilaiNormalisaliTanamans[$key][$namaKriteria] = round($dataNilai[$namaKriteria] / $nilaiMax, 2);
+                    $nilaiNormalisaliTanamans[$key][$namaKriteria] = round($dataNilai[$namaKriteria] / $nilaiMax, 3);
                 } else{
                     $nilaiNormalisaliTanamans[$key][$namaKriteria] = 0;
-                }
-                
+                }                
             }
         }
         // info($nilaiNormalisaliTanamans);
 
         $nilaiPembobotanTanamans = [];
-        foreach ($nilaiNormalisaliTanamans as $key => $dataNilai) {
+        foreach ($nilaiNormalisaliTanamans as $key => $dataNilaiNormalisasi) {
             // $nilaiPembobotanTanamans[$key] = [];
-            $nilaiPembobotanTanamans[$key] = ['nama' => $dataNilai['nama']];
+            $nilaiPembobotanTanamans[$key] = ['nama' => $dataNilaiNormalisasi['nama']];
             foreach ($arrayKriteria as $namaKriteria) {
                 // info($namaKriteria);
-                $nilaiPembobotanTanamans[$key][$namaKriteria] = $dataNilai[$namaKriteria] * $this->arrayKriteria[$namaKriteria]['bobot'] / 100;
+                $nilaiPembobotanTanamans[$key][$namaKriteria] = round($dataNilaiNormalisasi[$namaKriteria] * $this->arrayBobotKriteria[$namaKriteria]['bobot'] / 100,3);
             }
         }
-        // info($nilaiPembobotanTanamans);
+        info($nilaiPembobotanTanamans);
 
         $nilaiTotalTanamans = [];
-        foreach ($nilaiPembobotanTanamans as $key => $dataNilai) {
+        foreach ($nilaiPembobotanTanamans as $key => $dataNilaiPembobotan) {
             // $nilaiPembobotanTanamans[$key] = [];
             $nilaiTotalTanamans[$key] = [
-                'nama' => $dataNilai['nama'],
+                'nama' => $dataNilaiPembobotan['nama'],
                 'nilai' => 0,
             ];
-            foreach ($dataNilai as $namaKriteria => $nilai) {
+            info($nilaiTotalTanamans);
+            foreach ($dataNilaiPembobotan as $namaKriteria => $nilaiPembobotan) {
+                // info($nilaiPembobotanTanamans[$key]['nama']);
                 if ($namaKriteria != 'nama') {
-                    // info('nilai : '.$nilai);
-                    $nilaiTotalTanamans[$key]['nilai'] =round($nilaiTotalTanamans[$key]['nilai'] + $nilai, 2);
+                    // if($nilaiPembobotanTanamans[$key]['nama'] == 'Gandum'){
+
+                    //     info('total nilai sebelum: '.$nilaiTotalTanamans[$key]['nilai']);
+                    //     info('nilai : '.$nilaiPembobotan);
+                    // }                    
+                    // info($nilaiTotalTanamans);
+                    $nilaiTotalTanamans[$key]['nilai'] =round($nilaiTotalTanamans[$key]['nilai'] + $nilaiPembobotan, 3);
+
+                    // info('total nilai sesudah: '.$nilaiTotalTanamans[$key]['nilai']);
+                    // info('======');
                 }
-                
-                
             }
         }
         // info($nilaiTotalTanamans);
@@ -305,7 +316,7 @@ class SpkController extends Controller
 
     public function showGuest($id)
     {
-        $this->setArrayKriteria();
+        $this->setArrayBobotKriteria();
         $spk = inputData::where('id', $id)->first();
         $kriterias = Kriteria::all();
         $tanamans = Tanaman::all();
@@ -394,7 +405,7 @@ class SpkController extends Controller
             $nilaiPembobotanTanamans[$key] = ['nama' => $dataNilai['nama']];
             foreach ($arrayKriteria as $namaKriteria) {
                 // info($namaKriteria);
-                $nilaiPembobotanTanamans[$key][$namaKriteria] = $dataNilai[$namaKriteria] * $this->arrayKriteria[$namaKriteria]['bobot'] / 100;
+                $nilaiPembobotanTanamans[$key][$namaKriteria] = $dataNilai[$namaKriteria] * $this->arrayBobotKriteria[$namaKriteria]['bobot'] / 100;
             }
         }
         // info($nilaiPembobotanTanamans);

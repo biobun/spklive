@@ -34,6 +34,7 @@ class KecocokanCreate extends Component
 
     public function mount(Request $request)
     {
+        // dd($request);
         $this->kecocokan = $request->kecocokan;
         $inputType = $this->kriteria->type_data;
         if ($inputType == 'pilihan') {

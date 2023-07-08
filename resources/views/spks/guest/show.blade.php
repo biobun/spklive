@@ -5,7 +5,7 @@
                 <div class="p-6 text-gray-900 ">
                     <div class="grid grid-cols-2">
                         <div>
-                            <h1 class="mb-6 font-semibold">Data Input </h1>
+                            <h1 class="mb-6 font-semibold">Data Input</h1>
                         </div>
                         <div class="justify-end">
                             <a href="{{ route('spk.guest.create') }}"
