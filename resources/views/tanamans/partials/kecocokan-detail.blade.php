@@ -25,14 +25,14 @@
                     <div class="mr-2 font-semibold text-white bg-green-400 hover:bg-green-300 px-2 py-1 border border-transparent rounded-md">
                             <a href="{{ route('kecocokans.edit', [ 
                                 'kecocokan' => $kecocokanLahanDatas[$kriteria->id][$kecocokan]['kecocokan_id'],
+                                'delete_kecocokan' => false,
                                 ]) }}">Edit</a>
                     </div>
-                    <div class="mr-2 font-semibold text-white bg-green-400 hover:bg-green-300 px-2 py-1 border border-transparent rounded-md">
-                        <a href="{{ route('kecocokans.create', [ 
-                            'kriteria_id' => $kriteria->id,
-                            'tanaman_id' => $tanaman,
-                            'kecocokan' => $kecocokan,
-                            ]) }}" class="btn btn-warning">Delete</a>
+                    <div class="mr-2 font-semibold text-white bg-red-500 hover:bg-red-400 px-2 py-1 border border-transparent rounded-md">
+                        <a href="{{ route('kecocokans.edit', [ 
+                                'kecocokan' => $kecocokanLahanDatas[$kriteria->id][$kecocokan]['kecocokan_id'],
+                                'delete_kecocokan' => true,
+                                ]) }}">Delete</a>
                 </div>
                 </div>
                 {{-- <div class=" text-white bg-red-400 px-2 py-1 border border-transparent rounded-md hover:bg-red-300">

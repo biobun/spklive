@@ -53,7 +53,8 @@
                         
                         <div class="flex items-center gap-4">
                             <x-primary-button>{{ __('Save') }}</x-primary-button>
-                            {{-- <x-secondary-button>{{ __('Cancel') }}</x-secondary-button> --}}
+                            <a href="{{ url()->previous() }}" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150'">Cancel</a>
+                            {{-- <x-secondary-button >{{ __('Cancel') }}</x-secondary-button> --}}
                         </div>
                     </form>
                 </div>

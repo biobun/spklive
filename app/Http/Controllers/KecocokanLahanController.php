@@ -24,7 +24,17 @@ class KecocokanLahanController extends Controller
 
     public function edit(Request $request, $id)
     {
+        // dd($request);
         $kecocokan = KecocokanLahan::find($id);
+        if ($request->delete_kecocokan) {
+            # code...
+            $tanaman_id = $kecocokan->tanaman->id;
+            $kecocokan->delete();
+            
+            return redirect()->to('/tanamans/'.$tanaman_id.'/edit');
+
+        } else{
+            
         $tanaman = $kecocokan->tanaman;
         $kriteria = $kecocokan->kriteria;
         $typeData = $kriteria->type_data;
@@ -107,10 +117,88 @@ class KecocokanLahanController extends Controller
             'value' => $kecocokan->value,
             'type_data' => $typeData,
         ]);
+
+        }
+        
     }
     
     public function update(KecocokanLahanUpdateRequest $request, KecocokanLahan $kecocokan){
-        dd($request);
+        // dd($request);
+        // dd($kecocokan);
+        // dd($request);
+        $kriteria = $kecocokan->kriteria;
+        // dd($kriteria);
+        $typeData = $kriteria->type_data;
+        switch ($typeData) {
+            case 'angka':
+                $pilihanInput = $request->pilihanInput;
+                $value1 = 0;
+                $value2 = 0;
+                $value3 = 0;
+                $value4 = 0;
+        
+                switch ($pilihanInput) {
+                    case '1':
+                        $value1 = $request->value1;
+                        $value2 = $request->value2;
+                        break;
+        
+                    case '2':
+                        $value1 = $request->value1;
+                        $value2 = $request->value2;
+                        $value3 = $request->value3;
+                        $value4 = $request->value4;
+                        break;
+                    
+                    case '3':
+                        $value1 = $request->value1;
+                        break;
+                    
+                    case '4':
+                        $value2 = $request->value2;
+                        break;
+                    
+                    case '5':
+                        $value1 = $request->value1;
+                        $value2 = $request->value2;
+                        break;
+                }
+        
+                $dataValue = implode(';', [$value1, $value2, $value3, $value4]);
+                break;
+            case 'pilihan':
+                switch ($kriteria->name) {
+                    case 'Drainase':
+                        # code...
+                        $datas = Drainase::getDrainaseConstant();
+                        break;
+                    case 'Tekstur':
+                        # code...
+                        $datas = Tekstur::getTeksturConstant();
+                        break;
+                        
+                }
+                $dataValue = array_fill(0, count($datas), 0);
+                foreach ($datas as $key => $value) {
+                    if($request->has('selected'.$key)){
+                        $dataValue[$key] = 1;
+                    }
+                }
+                // dd($dataValue);
+                $dataValue = implode(';', $dataValue);
+                $pilihanInput = 0;
+                // dd($dataValue);
+                break;
+        }
+
+        // dd($kecocokan->tanaman);
+
+        $kecocokan->update([
+            'value' => $dataValue,
+            'value_type' => $pilihanInput,
+        ]);
+
+        return redirect()->to('/tanamans/'.$kecocokan->tanaman->id.'/edit');
     }
 
     public function create(Request $request)
