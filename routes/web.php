@@ -31,13 +31,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/tanamans', function () {
-        return view('tanamans.index');
-    })->name('tanamans.home');
+    // Route::get('/tanamans', function () {
+    //     return view('tanamans.index');
+    // })->name('tanamans.home');
     
-    Route::get('/tanamans/{id}', [TanamanController::class, 'show'])->name('tanamans.details');
+    // Route::get('/tanamans/{id}', [TanamanController::class, 'show'])->name('tanamans.details');
     
-    Route::get('/tanamans/{id}/edit', [TanamanController::class, 'edit'])->name('tanamans.edit');
+    // Route::get('/tanamans/{id}/edit', [TanamanController::class, 'edit'])->name('tanamans.edit');
     
     Route::get('/kriterias', function () {
         return view('kriterias.index');
@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
     // Route::get('/kecocokans/create', [KecocokanLahanController::class, 'create'])->name('kecocokans.create');
     // Route::get('/kecocokans/{id}/edit', [KecocokanLahanController::class, 'edit'])->name('kecocokans.edit');
     Route::resource('kecocokans', KecocokanLahanController::class);
+    Route::resource('tanamans', TanamanController::class);
     
     Route::get('/spks', function () {
         return view('spks.index');

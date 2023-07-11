@@ -1,10 +1,10 @@
 <section>
-    <div x-data="{ pilihanInput : 1 }" class="grid grid-cols-4 gap-6 mt-6">
+    <div x-data="{ pilihanInput : {{ $pilihanInput }} }" class="grid grid-cols-4 gap-6 mt-6">
         <div>
             {{-- <label for="type" class="form-label">Tipe Data</label> --}}
             <x-input-label for="type" :value="__('Tipe Data')" />
-            <select class="mt-1 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"  x-model.number="pilihanInput" name="pilihanInput">
-                <option value="1">1 Rentang nilai</option>
+            <select class="mt-1 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"  x-model.number="pilihanInput" name="pilihanInput" value="pilihanInput">
+                <option value="1" >1 Rentang nilai</option>
                 <option value="2">2 Rentang nilai</option>
                 <option value="3">Nilai lebih kecil dari</option>
                 <option value="4">Nilai lebih besar dari</option>

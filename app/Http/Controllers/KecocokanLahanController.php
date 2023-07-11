@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Constants\Drainase;
 use App\Constants\Tekstur;
+use App\Http\Requests\KecocokanLahanUpdateRequest;
 use Illuminate\Http\Request;
 use App\Models\KecocokanLahan;
 use App\Models\Kriteria;
@@ -24,9 +25,92 @@ class KecocokanLahanController extends Controller
     public function edit(Request $request, $id)
     {
         $kecocokan = KecocokanLahan::find($id);
+        $tanaman = $kecocokan->tanaman;
+        $kriteria = $kecocokan->kriteria;
+        $typeData = $kriteria->type_data;
+        $nilaiKecocokan = $kecocokan->kecocokan;
+        $value_type = $kecocokan->value_type;
+        $value = $kecocokan->value;
+        $valueArray = explode(';', $value);
+        $typeData = $kriteria->type_data;
+        switch ($typeData) {
+            case 'angka':
+                $value1 = $valueArray[0];
+                $value2 = $valueArray[1];
+                $value3 = $valueArray[2];
+                $value4 = $valueArray[3];
+                return view('kecocokans.edit', [
+                    'id' => $id,
+                    'kriteria' => $kriteria,
+                    'tanaman' => $tanaman,
+                    'pilihanInput' => $value_type,
+                    'type_data' => $typeData,
+                    'value1' => $value1,  
+                    'value2' => $value2,  
+                    'value3' => $value3,  
+                    'value4' => $value4,  
+                    'kecocokan' => $nilaiKecocokan,   
+
+                ]);
+                break;
+            case 'pilihan':
+                switch ($kriteria->name) {
+                    case 'Drainase':
+                        # code...
+                        $datas = Drainase::getDrainaseConstant();
+                        break;
+                    case 'Tekstur':
+                        # code...
+                        $datas = Tekstur::getTeksturConstant();
+                        break;
+                        
+                }
+                $optionAvailable = array_fill(0, count($datas), 0);
+                
+                $kecocokanLahanAvailable = KecocokanLahan::where('tanaman_id',$tanaman->id)->where('kriteria_id',$kriteria->id)->where('id','!=',$kecocokan->id)->get();
+                
+                info($kecocokanLahanAvailable);
+                foreach ($kecocokanLahanAvailable as $kecocokanLahan) {
+                    $dataValue = $kecocokanLahan->value;
+                    $dataValueArray = explode(';', $dataValue);
+                    foreach ($dataValueArray as $index => $value) {
+                        # code...
+                        // info('avail kecocokan data '.$index.' '.$value );
+                        if($value){
+                            // info($value);
+                            $optionAvailable[$index] = $value;
+                        }
+                    }
+                }
+                foreach ($datas as $key => $namaPilihan) {
+                    
+                    $array_value = ['name' => $namaPilihan, 'disable' => $optionAvailable[$key], 'selected' => $valueArray[$key]];
+                    $datasItemNameSelected[$key] = $array_value;
+                }
+                // dd($datasItemNameSelected);
+                return view('kecocokans.edit', [
+                    'id' => $id,
+                    'kriteria' => $kriteria,
+                    'tanaman' => $tanaman,
+                    'type_data' => $typeData,
+                    'datasItemNameSelected' => $datasItemNameSelected,
+                    'kecocokan' => $request->kecocokan,   
+                ]);
+                break;
+        }
+
         return view('kecocokans.edit', [
-            'kecocokan_id' => $kecocokan,
+            'id' => $id,
+            'kecocokan' => $kecocokan->kecocokan,
+            'tanaman' => $kecocokan->tanaman,
+            'kriteria' => $kecocokan->kriteria,
+            'value' => $kecocokan->value,
+            'type_data' => $typeData,
         ]);
+    }
+    
+    public function update(KecocokanLahanUpdateRequest $request, KecocokanLahan $kecocokan){
+        dd($request);
     }
 
     public function create(Request $request)
@@ -39,6 +123,7 @@ class KecocokanLahanController extends Controller
                 return view('kecocokans.create', [
                     'kriteria' => $kriteria,
                     'tanaman' => $tanaman,
+                    'pilihanInput' => 1,
                     'type_data' => $typeData,
                     'value1' => 0,  
                     'value2' => 0,  
@@ -78,13 +163,14 @@ class KecocokanLahanController extends Controller
                     }
                 }
                 foreach ($datas as $key => $value) {
-                    $array_value = ['name' => $value, 'disable' => $optionAvailable[$key]];
+                    $array_value = ['name' => $value, 'disable' => $optionAvailable[$key], 'selected' => false];
                     $datasItemNameSelected[$key] = $array_value;
                 }
                 // dd($datasItemNameSelected);
                 return view('kecocokans.create', [
                     'kriteria' => $kriteria,
                     'tanaman' => $tanaman,
+                    'pilihanInput' => 1,
                     'type_data' => $typeData,
                     'datasItemNameSelected' => $datasItemNameSelected,
                     'kecocokan' => $request->kecocokan,   
@@ -159,10 +245,6 @@ class KecocokanLahanController extends Controller
                 // dd($dataValue);
                 break;
         }
-
-        
-
-       
 
         KecocokanLahan::create([
             'tanaman_id' => $request->tanaman,

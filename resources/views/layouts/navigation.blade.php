@@ -19,7 +19,7 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('tanamans.home')" :active="request()->routeIs('tanamans.home')">
+                    <x-nav-link :href="route('tanamans.index')" :active="request()->routeIs('tanamans.index')">
                         {{ __('Tanaman') }}
                     </x-nav-link>
                 </div>
