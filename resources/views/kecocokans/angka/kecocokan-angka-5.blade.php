@@ -2,12 +2,14 @@
     <div>
         <x-input-label for="kelembapan" :value="__('Nilai Lebih kecil dari')" />
         <x-text-input type="text"
-            class="form-control is-invalid @enderror block mt-1 w-full"   value="{{ $value1 }}"/>
+            class="form-control is-invalid @enderror block mt-1 w-full" :value="old('value1', $value1)" name="value1" />
+            <x-input-error class="mt-2" :messages="$errors->get('value1')" />
     </div>
     <div>
         <x-input-label for="kelembapan" :value="__('Nilai lebih besar dari')" />
         <x-text-input type="text"
-            class="form-control is-invalid @enderror block mt-1 w-full"   value="{{ $value2 }}"/>
+            class="form-control is-invalid @enderror block mt-1 w-full" :value="old('value2', $value2)" name="value2" />
+            <x-input-error class="mt-2" :messages="$errors->get('value2')" />
     </div>
 </div>
 {{-- <div>
