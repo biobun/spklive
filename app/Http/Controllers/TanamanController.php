@@ -389,7 +389,7 @@ class TanamanController extends Controller
             'tanaman' => $tanaman,
             'name' => $name,
             'kecocokanLahanDatas' => $kecocokanLahanDatas,
-            'kriterias' => Kriteria::orderBy('id', 'asc')->get(),
+            'kriterias' => Kriteria::orderBy('order', 'asc')->get(),
         ]);
     }
 }
