@@ -32,6 +32,7 @@
                 </div>
                 
                 <div class="py-6">
+                    asdasd
                     @if ($kriteria->type_data == 'angka')
                     @livewire('kecocokan-angka', ['dataValue'=>$dataValue, 'inputType'=>$inputAngkaType])
                     @elseif ($kriteria->type_data == 'pilihan')

@@ -1,11 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Edit Tanaman dan Kecocokan Lahan') }}
+            Edit Kriteria Tanaman {{ $tanaman->name }}
         </h2>
     </x-slot>
     <div class="pt-4 max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <a href="{{ route('tanamans.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-800  border border-transparent rounded-md font-semibold text-xs text-white  uppercase tracking-widest hover:bg-gray-700  focus:bg-gray-700  active:bg-gray-900  focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2  transition ease-in-out duration-150">Back</a>
+        <a href="{{ route('tanamans.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-800  border border-transparent rounded-md font-semibold text-xs text-white  uppercase tracking-widest hover:bg-gray-700  focus:bg-gray-700  active:bg-gray-900  focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2  transition ease-in-out duration-150 mb-3">Kembali</a>
     </div>
     <div>
         {{-- @livewire('tanaman-edit', ['tanaman'=>$tanaman]) --}}

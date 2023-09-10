@@ -15,12 +15,20 @@ class KriteriaSeeder extends Seeder
     public function run(): void
     {
         //
-        DB::table('kriterias')->insert([[
+        DB::table('kriterias')->insert([
+        [
             'name' => 'Suhu',
             'bobot' => 20,
             'type_data' => 'angka',
             'lambang' => '°C',
             'col_name' => 'suhu',
+        ],
+        [
+            'name' => 'Curah Hujan',
+            'bobot' => 20,
+            'type_data' => 'angka',
+            'lambang' => 'mm',
+            'col_name' => 'curah_hujan',
         ],
         [
             'name' => 'Kelembapan',

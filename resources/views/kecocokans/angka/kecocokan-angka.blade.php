@@ -1,5 +1,5 @@
 <section>
-    <div x-data="{ pilihanInput : {{ $pilihanInput }} }" class="grid grid-cols-4 gap-6 mt-6">
+    <div x-data="{ pilihanInput : {{ $pilihanInput }} }" class="grid grid-cols-4 gap-6">
         <div>
             {{-- <label for="type" class="form-label">Tipe Data</label> --}}
             <x-input-label for="type" :value="__('Tipe Data')" />
