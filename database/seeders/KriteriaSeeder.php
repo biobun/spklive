@@ -26,7 +26,7 @@ class KriteriaSeeder extends Seeder
         ],
         [
             'name' => 'Kelembapan',
-            'bobot' => 20,
+            'bobot' => 10,
             'type_data' => 'angka',
             'lambang' => '%',
             'col_name' => 'kelembapan',
@@ -66,7 +66,7 @@ class KriteriaSeeder extends Seeder
         ],
         [
             'name' => 'Lereng',
-            'bobot' => 10,
+            'bobot' => 5,
             'type_data' => 'angka',
             'lambang' => '%',
             'col_name' => 'lereng',
@@ -82,7 +82,7 @@ class KriteriaSeeder extends Seeder
         ],
         [
             'name' => 'Bahaya Banjir',
-            'bobot' => 10,
+            'bobot' => 5,
             'type_data' => 'pilihan2',
             'lambang' => '',
             'col_name' => 'bahaya_banjir',

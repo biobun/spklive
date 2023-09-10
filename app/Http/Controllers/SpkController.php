@@ -7,7 +7,6 @@ use App\Constants\BanjirLama;
 use App\Constants\Drainase;
 use App\Constants\Tekstur;
 use App\Models\inputData;
-use App\Models\KecocokanLahan;
 use App\Models\Kriteria;
 use App\Models\Tanaman;
 use Illuminate\Http\Request;
@@ -130,18 +129,18 @@ class SpkController extends Controller
 
     public function getNilaiKriteriaPilihan2($tanaman, $nilaiInput, $namaKriteria)
     {
-        $nilaiOutput = 0;
-        // info($dataPilihan[$nilaiInput]);
-        foreach ($tanaman->kecocokans()->where('kriteria_id',$this->arrayBobotKriteria[$namaKriteria]['id'])->orderBy('kecocokan', 'desc')
-        ->get() as $kecocokanLahan) {
-            $value =$kecocokanLahan->value;
-            // info($value);
-            // info($nilaiInput);
-            if ($nilaiInput == $value) {
-                $nilaiOutput = $kecocokanLahan->kecocokan;
-            }            
-            if($nilaiOutput > 0){
+        $banjirDalamValue = substr($nilaiInput, 0, 1);
+        $lamaBanjirValue = substr($nilaiInput, -1);
+        
+        $bahayaBanjirValue = ($banjirDalamValue * 1) + ($lamaBanjirValue * 4);
+        $results = $tanaman->bahayaBanjir;
+
+        foreach($results as $result) {
+            if ($result->value == $bahayaBanjirValue) {
+                $nilaiOutput = $result->bobot;
                 break;
+            } else {
+                $nilaiOutput = 0;
             }
         }
         return $nilaiOutput;

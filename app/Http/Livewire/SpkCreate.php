@@ -25,8 +25,8 @@ class SpkCreate extends Component
     public $drainase = 1;
     public $tekstur = 1;
     public $lereng = 2;
-    public $kedalamanBanjir = 0;
-    public $lamaBanjir=0;
+    public $kedalamanBanjir = 1;
+    public $lamaBanjir = 1;
 
     public $guest = false;
 

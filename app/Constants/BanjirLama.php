@@ -9,10 +9,10 @@ class BanjirLama
     const D2 = "3 - 6 bulan";
     const D3 = "> 6 bulan";
 
-    const D0_VALUE = 0;
-    const D1_VALUE = 1;
-    const D2_VALUE = 2;
-    const D3_VALUE = 3;
+    const D0_VALUE = 1;
+    const D1_VALUE = 2;
+    const D2_VALUE = 3;
+    const D3_VALUE = 4;
 
 
     public static function getBanjirLamaConstant()

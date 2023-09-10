@@ -20,4 +20,9 @@ class Tanaman extends Model
         # code...
         return $this->hasMany(KecocokanLahan::class);
     }
+
+    public function bahayaBanjir(): HasMany
+    {
+        return $this->hasMany(BahayaBanjir::class);
+    }
 }

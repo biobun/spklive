@@ -9,10 +9,10 @@ class BanjirDalam
     const F2 = "50 - 150 cm";
     const F3 = "> 150 cm";
 
-    const F0_VALUE = 0;
-    const F1_VALUE = 1;
-    const F2_VALUE = 2;
-    const F3_VALUE = 3;
+    const F0_VALUE = 1;
+    const F1_VALUE = 2;
+    const F2_VALUE = 3;
+    const F3_VALUE = 4;
 
 
     public static function getBanjirDalamConstant()
