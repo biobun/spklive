@@ -28,9 +28,7 @@
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
             <div>
                 <a href="/">
-                    {{--
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" /> --}}
-                    <img class=" h-28" src="{{ asset('images/ipb_logo.png') }}" alt="description of myimage">
+                    <img class=" h-28" src="logo.png">
                 </a>
             </div>
 

@@ -29,6 +29,7 @@
                 </div>
                 <div class="mt-6">
                     <x-input-label for="name" :value="__('Drainase')" />
+                    <img class="object-none object-center py-2" src={{url('drainase.png')}}>
                     <select wire:model="drainase"
                         class="form-control block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                         @foreach ($drainaseOption as $key => $item)
@@ -38,18 +39,6 @@
                     <x-input-error class="mt-2" :messages="$errors->get('name')" />
                 </div>
                 <div class="mt-6">
-                    <x-input-label for="name" :value="__('Tekstur')" />
-                    <select wire:model="tekstur"
-                        class="form-control block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-                        @foreach ($teksturOption as $key => $item)
-                        <option value="{{ $key }}">{{ $item }}</option>
-                        @endforeach
-                    </select>
-                    <x-input-error class="mt-2" :messages="$errors->get('name')" />
-                </div>
-            </div>
-            <div>
-                <div>
                     <x-input-label for="kedalamanTanah" :value="__('Kedalaman tanah (cm)')" />
                     <x-text-input type="text"
                         class="form-control @error('kedalamanTanah') is-invalid @enderror block mt-1 w-full"
@@ -65,6 +54,19 @@
                     <x-input-error class="mt-2" :messages="$errors->get('keasaman')" />
 
                 </div>
+            </div>
+            <div>
+                <div>
+                    <x-input-label for="name" :value="__('Tekstur')" />
+                    <img class="object-none object-center py-2" src={{url('tekstur1.png')}}>
+                    <select wire:model="tekstur"
+                        class="form-control block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                        @foreach ($teksturOption as $key => $item)
+                        <option value="{{ $key }}">{{ $item }}</option>
+                        @endforeach
+                    </select>
+                    <x-input-error class="mt-2" :messages="$errors->get('name')" />
+                </div>
                 <div class="mt-6">
                     <x-input-label for="lereng" :value="__('Lereng (%)')" />
                     <x-text-input type="text"
@@ -75,7 +77,7 @@
                 </div>
                 <div class="mt-6">
                     <x-input-label for="name" :value="__('Kedalaman Banjir')" />
-                    <select
+                    <select wire:model="kedalamanBanjir"
                         class="form-control block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                         @foreach ($banjirDalamOption as $key => $item)
                         <option value="{{ $key }}">{{ $item }}</option>
@@ -85,7 +87,7 @@
                 </div>
                 <div class="mt-6">
                     <x-input-label for="name" :value="__('Durasi Banjir')" />
-                    <select
+                    <select wire:model="lamaBanjir"
                         class="form-control block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                         @foreach ($banjirLamaOption as $key => $item)
                         <option value="{{ $key }}">{{ $item }}</option>

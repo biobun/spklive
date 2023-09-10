@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -5,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>SPK Kelayakan Lahan Tanaman Serealia</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -18,35 +19,50 @@
 </head>
 
 <body class="antialiased">
-    <div class="bg-white">
-        <div class="relative isolate px-6 pt-6 lg:px-8">
-            <div class="absolute inset-x-0 -top-20 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+    <nav id="header" class="w-full z-30 top-0 bg-orange-50 text-white py-0">
+        <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-1 py-0 lg:py-2">
+          <!--Logo-->
+          <div class="pl-4 flex items-center">
+            <img class="w-14 h-14" src={{url('logoipb.png')}}>
+            <img class="h-16" src="logo1.png">
+          </div>
+        </div>
+    </nav>
+
+
+    <div class="flex justify-center bg-white px-8 py-8">
+        <div class="bg-orange-50 max-w-lg rounded overflow-hidden shadow-lg">
+            <img class="w-full" src="{{url('landing.png')}}">
+            <div class="px-6 py-4">
+                <div class="font-extrabold font-serif text-xl text-center mb-2">Sistem Pendukung Keputusan Penentuan Lahan Tanaman Serealia di Kecamatan Dramaga!</div>
+            </div>
+        </div>
+        <div class="relative isolate px-4 pt-6 lg:px-4">
+            {{-- <div class="absolute inset-x-0 -top-20 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-50"
                 aria-hidden="true">
                 <div class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
                     style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
                 </div>
-            </div>
-            <div class="mx-auto max-w-4xl py-32 sm:py-48 lg:py-32">
-                <div class=" justify-center">
-                    <img class=" h-60 w-auto mx-auto" src="{{ asset('images/ipb_logo.png') }}"
-                        alt="description of myimage">
-                </div>
-                <div class="text-center">
-                    <p class="mt-6 text-2xl leading-8 text-gray-600">Selamat Datang di Website Aplikasi</p>
-                </div>
+            </div> --}}
+            <div class="mx-auto max-w-4xl py-12">
                 <div class="text-center mt-6">
-                    <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Sistem Pendukung Keputusan
-                    </h1>
-                    <p class="mt-6 text-2xl leading-8 text-gray-600">Aplikasi penentuan kelayakan lahan
-                        untuk tanaman Serealia di Kecamatan Dramaga</p>
-                    <p class="mt-6 text-lg leading-8 text-gray-600">Website Aplikasi ini dibuat sebagai Tugas Skripsi
-                        Mahasiswi Institut Pertanian Bogor</p>
-                    <p class="mt-4 leading-8 text-gray-600 text-2xl font-bold">AL KHANSA ALBIZIA PUTRI HERMAWAN</p>
-                    <div class="mt-10 flex items-center justify-center gap-x-6">
+                    <div class="justify-center box-border h-500 w-400 border-0 mb-4">
+                        <div class="font-extrabold text-center text-2xl mb-2">SELAMAT DATANG DI WEBSITE!</div>
+                        <p class="text-center text-gray-800 font-serif text-base md:text-lg lg:text-lg mb-8 mx-50">
+                            Sistem pendukung keputusan ini di peruntukkan untuk semua elemen masyarakat di Kecamatan Dramaga, khususnya para petani dan pemilik lahan guna membantu dalam menentukan jenis tanaman serealia yang akan dibudidayakan dengan memperhatikan karakteristik tanah
+                        </p>
+                    </div>
+
+                    <div class="mt-18 flex items-center justify-center gap-x-6">
                         <a href="{{ route('spk.guest.create') }}"
-                            class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Mulai
+                            class="rounded-md bg-yellow-800 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-yellow-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-600">Mulai
                             menggunakan</a>
                     </div>
+
+                    {{-- <div class="mt-6 flex items-center justify-center gap-x-6">
+                        <a href="/panduan"
+                            class="rounded-md bg-yellow-800 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-yellow-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-600">Panduan</a>
+                    </div> --}}
                 </div>
 
                 <div class="text-center">
@@ -79,4 +95,15 @@
     </div>
 </body>
 
+
+<footer class="bg-orange-50 rounded-lg shadow dark:bg-gray-900">
+    <div class="w-full max-w-screen-xl mx-auto p-4">
+        <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+        <div class="sm:text-center text-base text-zinc-700 font-semibold">
+           <p>
+            Website dibuat sebagai Tugas Akhir IPB University,  Al Khansa Albizia Putri Hermawan | F14180032 </p> 
+            </div>
+        <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023. All Rights Reserved.</span>
+    </div>
+</footer>
 </html>
