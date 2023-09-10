@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('type_data');
             $table->string('lambang');
             $table->string('col_name');
+            $table->unsignedSmallInteger('order');
             $table->timestamps();
         });
     }

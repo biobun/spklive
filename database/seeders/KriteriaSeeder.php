@@ -22,13 +22,7 @@ class KriteriaSeeder extends Seeder
             'type_data' => 'angka',
             'lambang' => '°C',
             'col_name' => 'suhu',
-        ],
-        [
-            'name' => 'Curah Hujan',
-            'bobot' => 20,
-            'type_data' => 'angka',
-            'lambang' => 'mm',
-            'col_name' => 'curah_hujan',
+            'order' => 1,
         ],
         [
             'name' => 'Kelembapan',
@@ -36,6 +30,7 @@ class KriteriaSeeder extends Seeder
             'type_data' => 'angka',
             'lambang' => '%',
             'col_name' => 'kelembapan',
+            'order' => 3,
         ],
         [
             'name' => 'Drainase',
@@ -43,6 +38,7 @@ class KriteriaSeeder extends Seeder
             'type_data' => 'pilihan',
             'lambang' => '',
             'col_name' => 'drainase',
+            'order' => 4,
         ],
         [
             'name' => 'Tekstur',
@@ -50,6 +46,7 @@ class KriteriaSeeder extends Seeder
             'type_data' => 'pilihan',
             'lambang' => '',
             'col_name' => 'tekstur',
+            'order' => 5,
         ],
         [
             'name' => 'Kedalaman tanah',
@@ -57,6 +54,7 @@ class KriteriaSeeder extends Seeder
             'type_data' => 'angka',
             'lambang' => 'cm',
             'col_name' => 'kedalaman_tanah',
+            'order' => 6,
         ],
         [
             'name' => 'Keasaman',
@@ -64,6 +62,7 @@ class KriteriaSeeder extends Seeder
             'type_data' => 'angka',
             'lambang' => '',
             'col_name' => 'keasaman',
+            'order' => 7,
         ],
         [
             'name' => 'Lereng',
@@ -71,6 +70,15 @@ class KriteriaSeeder extends Seeder
             'type_data' => 'angka',
             'lambang' => '%',
             'col_name' => 'lereng',
+            'order' => 8,
+        ],
+        [
+            'name' => 'Curah Hujan',
+            'bobot' => 20,
+            'type_data' => 'angka',
+            'lambang' => 'mm',
+            'col_name' => 'curah_hujan',
+            'order' => 2,
         ],
         [
             'name' => 'Bahaya Banjir',
@@ -78,6 +86,7 @@ class KriteriaSeeder extends Seeder
             'type_data' => 'pilihan2',
             'lambang' => '',
             'col_name' => 'bahaya_banjir',
+            'order' => 9,
         ]]
     );
     }
