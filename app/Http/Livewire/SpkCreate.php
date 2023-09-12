@@ -6,6 +6,7 @@ use App\Constants\BanjirDalam;
 use App\Constants\BanjirLama;
 use App\Constants\Drainase;
 use App\Constants\Tekstur;
+use App\Models\City;
 use App\Models\inputData;
 use Illuminate\Http\Request;
 use Livewire\Component;
@@ -17,9 +18,11 @@ class SpkCreate extends Component
     public $banjirDalamOption;
     public $banjirLamaOption;
 
+    public $selectedCity = null;
     public $lahan = 'Lahan 1';
-    public $suhu = 27;
-    public $kelembapan = 30;
+    public $suhu = null;
+    public $curahHujan = null;
+    public $kelembapan = null;
     public $kedalamanTanah = 50;
     public $keasaman = 7;
     public $drainase = 1;
@@ -37,12 +40,22 @@ class SpkCreate extends Component
         $this->teksturOption = Tekstur::getTeksturConstant();
         $this->banjirDalamOption = BanjirDalam::getBanjirDalamConstant();
         $this->banjirLamaOption = BanjirLama::getBanjirLamaConstant();
-        // dd($this->drainaseOption);
+        // dd($this->cities);
+    }
+
+    public function updatedSelectedCity($id)
+    {
+        $city = City::where('id', $id)->first();
+        $this->suhu = $city->temperature;
+        $this->curahHujan = $city->rainfall;
+        $this->kelembapan = $city->humidity;
     }
 
     public function render()
     {
-        return view('livewire.spk-create');
+        return view('livewire.spk-create', [
+            'cities' => City::all(),
+        ]);
     }
 
     public function store(Request $request)
@@ -51,6 +64,7 @@ class SpkCreate extends Component
         $this->validate();
         $spk_id = inputData::create([
             'suhu' => $this->suhu,
+            'curah_hujan' => $this->curahHujan,
             'kelembapan' => $this->kelembapan,
             'kedalaman_tanah' => $this->kedalamanTanah,
             'keasaman' => $this->keasaman,
@@ -77,6 +91,7 @@ class SpkCreate extends Component
         $this->validate();
         $spk_id = inputData::create([
             'suhu' => $this->suhu,
+            'curah_hujan' => $this->curahHujan,
             'kelembapan' => $this->kelembapan,
             'kedalaman_tanah' => $this->kedalamanTanah,
             'keasaman' => $this->keasaman,
@@ -103,6 +118,7 @@ class SpkCreate extends Component
     {
         return [
             'suhu' => 'required|numeric|min:1',
+            'curahHujan' => 'required|numeric|min:1',
             'kelembapan' => 'required|numeric',
             'kedalamanTanah' => 'required|numeric',
             'keasaman' => 'required|numeric',
@@ -113,6 +129,9 @@ class SpkCreate extends Component
         'suhu.required' => 'Data suhu harus diisi.',
         'suhu.numeric' => 'Data suhu harus berupa angka.',
         'suhu.min' => 'Data suhu harus lebih besar dari 0.',
+        'curahHujan.required' => 'Data curah hujan harus diisi.',
+        'curahHujan.numeric' => 'Data curah hujan harus berupa angka.',
+        'curahHujan.min' => 'Data curah hujan harus lebih besar dari 0.',
         'kelembapan.required' => 'Data kelembapan harus diisi.',
         'kelembapan.numeric' => 'Data kelembapan harus berupa angka.',
         'keasaman.required' => 'Data keasaman harus diisi.',

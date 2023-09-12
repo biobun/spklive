@@ -6,23 +6,30 @@
         <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <div >
                 <div>
-                    <x-input-label for="lahan" :value="__('Nama Lahan')" />
-                    <x-text-input type="text" class="form-control @error('lahan') is-invalid @enderror block mt-1 w-full"
-                        wire:model="lahan" />
-                    <x-input-error class="mt-2" :messages="$errors->get('lahan')" />
-
+                    <x-input-label for="lahan" :value="__('Daerah')" />
+                    <select wire:model="selectedCity"
+                        class="form-control block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                        @foreach ($cities as $city)
+                        <option value="{{ $city->id }}">{{ $city->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="mt-6">
                     <x-input-label for="suhu" :value="__('Suhu (°C)')" />
-                    <x-text-input type="text" class="form-control @error('suhu') is-invalid @enderror block mt-1 w-full"
+                    <x-text-input disabled type="text" class="form-control @error('suhu') is-invalid @enderror block mt-1 w-full bg-slate-300 bg-opacity-70"
                         wire:model="suhu" />
                     <x-input-error class="mt-2" :messages="$errors->get('suhu')" />
-
+                </div>
+                <div class="mt-6">
+                    <x-input-label for="curahHujan" :value="__('Curah Hujan (mm)')" />
+                    <x-text-input disabled type="text" class="form-control @error('curahHujan') is-invalid @enderror block mt-1 w-full bg-slate-300 bg-opacity-70"
+                        wire:model="curahHujan" />
+                    <x-input-error class="mt-2" :messages="$errors->get('curahHujan')" />
                 </div>
                 <div class="mt-6">
                     <x-input-label for="kelembapan" :value="__('Kelembapan (%)')" />
                     <x-text-input type="text"
-                        class="form-control @error('kelembapan') is-invalid @enderror block mt-1 w-full"
+                        class="form-control @error('kelembapan') is-invalid @enderror block mt-1 w-full bg-slate-300 bg-opacity-70"
                         wire:model="kelembapan" />
                     <x-input-error class="mt-2" :messages="$errors->get('kelembapan')" />
 

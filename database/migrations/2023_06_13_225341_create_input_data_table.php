@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('input_data', function (Blueprint $table) {
             $table->id();
             $table->float('suhu')->default(0);
+            $table->float('curah_hujan')->default(0);
             $table->float('kelembapan')->default(0);
             $table->string('drainase')->default('');
             $table->string('tekstur')->default('');

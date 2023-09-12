@@ -16,6 +16,7 @@
                         <thead>
                             <tr>
                                 <th>Suhu (°C)</th>
+                                <th>Curah Hujan (mm)</th>
                                 <th>Kelembapan (%)</th>
                                 <th>Drainase</th>
                                 <th>Tekstur</th>
@@ -28,7 +29,9 @@
                         </thead>
                         <tbody>
                             <tr class="text-center">
+                                {{ $spk }}
                                 <td>{{ $spk->suhu }}</td>
+                                <td>{{ $spk->curah_hujan }}</td>
                                 <td>{{ $spk->kelembapan }}</td>
                                 <td>{{ $dataDrainase[$spk->drainase] }}</td>
                                 <td>{{ $dataTekstur[$spk->tekstur] }}</td>

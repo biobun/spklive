@@ -11,6 +11,7 @@ class inputData extends Model
 
     protected $fillable = [
         'suhu',
+        'curah_hujan',
         'kelembapan',
         'kedalaman_tanah',
         'keasaman',

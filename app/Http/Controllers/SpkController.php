@@ -151,7 +151,6 @@ class SpkController extends Controller
     {
         $this->setArrayBobotKriteria();
         $spk = inputData::where('id', $id)->first();
-
         $kriterias = Kriteria::all();
         $tanamans = Tanaman::all();
 
