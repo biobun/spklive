@@ -11,7 +11,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white  overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 ">
-                    <h1 class="mb-6">Data Input</h1>
+                    <h1 class="mb-6 text-center font-semibold">DATA INPUT</h1>
                     <table class="table mt-1 w-full" border="1">
                         <thead>
                             <tr>
@@ -29,7 +29,7 @@
                         </thead>
                         <tbody>
                             <tr class="text-center">
-                                {{ $spk }}
+                                {{-- {{ $spk }} --}}
                                 <td>{{ $spk->suhu }}</td>
                                 <td>{{ $spk->curah_hujan }}</td>
                                 <td>{{ $spk->kelembapan }}</td>
@@ -59,6 +59,7 @@
                                 <th class="px-6 py-3">No</th>
                                 <th>Nama Tanaman</th>
                                 <th>Suhu (°C)</th>
+                                <th>Curah Hujan (mm)</th>
                                 <th>Kelembapan (%)</th>
                                 <th>Drainase</th>
                                 <th>Tekstur</th>
@@ -74,6 +75,7 @@
                                 <td class="px-6 py-3">{{ $index}}.</td>
                                 <td class="text-left">{{ $nilaiTanaman['nama'] }}</td>
                                 <td>{{ $nilaiTanaman['suhu'] }}</td>
+                                <td>{{ $nilaiTanaman['curah_hujan'] }}</td>
                                 <td>{{ $nilaiTanaman['kelembapan'] }}</td>
                                 <td>{{ $nilaiTanaman['drainase'] }}</td>
                                 <td>{{ $nilaiTanaman['tekstur'] }}</td>
@@ -102,6 +104,7 @@
                                 <th class="px-6 py-3">No</th>
                                 <th>Nama Tanaman</th>
                                 <th>Suhu (°C)</th>
+                                <th>Curah Hujan (mm)</th>
                                 <th>Kelembapan (%)</th>
                                 <th>Drainase</th>
                                 <th>Tekstur</th>
@@ -117,6 +120,7 @@
                                 <td class="px-6 py-3">{{ $index}}.</td>
                                 <td class="text-left">{{ $nilaiTanaman['nama'] }}</td>
                                 <td>{{ $nilaiTanaman['suhu'] }}</td>
+                                <td>{{ $nilaiTanaman['curah_hujan'] }}</td>
                                 <td>{{ $nilaiTanaman['kelembapan'] }}</td>
                                 <td>{{ $nilaiTanaman['drainase'] }}</td>
                                 <td>{{ $nilaiTanaman['tekstur'] }}</td>
@@ -146,6 +150,7 @@
                                 <th class="px-6 py-3">No</th>
                                 <th>Nama Tanaman</th>
                                 <th>Suhu (°C)</th>
+                                <th>Curah Hujan (mm)</th>
                                 <th>Kelembapan (%)</th>
                                 <th>Drainase</th>
                                 <th>Tekstur</th>
@@ -161,6 +166,7 @@
                                 <td class="px-6 py-3">{{ $index}}.</td>
                                 <td class="text-left">{{ $nilaiTanaman['nama'] }}</td>
                                 <td>{{ $nilaiTanaman['suhu'] }}</td>
+                                <td>{{ $nilaiTanaman['curah_hujan'] }}</td>
                                 <td>{{ $nilaiTanaman['kelembapan'] }}</td>
                                 <td>{{ $nilaiTanaman['drainase'] }}</td>
                                 <td>{{ $nilaiTanaman['tekstur'] }}</td>

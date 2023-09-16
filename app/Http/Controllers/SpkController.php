@@ -99,25 +99,9 @@ class SpkController extends Controller
         foreach ($tanaman->kecocokans()->where('kriteria_id',$this->arrayBobotKriteria[$namaKriteria]['id'])->orderBy('kecocokan', 'desc')
         ->get() as $kecocokanLahan) {
             $valueArray = explode(';', $kecocokanLahan->value);
-            // info($valueArray);
-            // $valueArray = [0,0,1,0,0,0,0,1]
-            //$valueArray[2] = 1
-            // Mencocokan urutan pilihan dengan input pilihan
-            
-            // foreach($valueArray as $key => $value){
-            //     if($key == $nilaiInput){
-            //         if($value == 1){
-            //             //  cocok;
-            //             $nilaiOutput = $kecocokanLahan->kecocokan;
-            //         } else {
-            //             // tidak cocok;
-            //         }
-            //     }
-            // }
-            // info($sameIndex);
+
             $sameIndex = $valueArray[$nilaiInput];
             if ($sameIndex) {
-                // info('same index');
                 $nilaiOutput = $kecocokanLahan->kecocokan;
             }            
             if($nilaiOutput > 0){
@@ -155,6 +139,7 @@ class SpkController extends Controller
         $tanamans = Tanaman::all();
 
         $spkSuhu = $spk->suhu;
+        $spkCurahHujan = $spk->curah_hujan;
         $spkKelembapan = $spk->kelembapan;
         $spkDrainase = $spk->drainase;
         $spkKedalamanTanah = $spk->kedalaman_tanah;
@@ -174,6 +159,7 @@ class SpkController extends Controller
             // info('============');
             // info($tanaman->name);
             $nilaiSuhu = $this->getNilaiKriteriaAngka($tanaman,$spkSuhu,'suhu');
+            $nilaiCurahHujan = $this->getNilaiKriteriaAngka($tanaman,$spkCurahHujan, 'curah_hujan');
             $nilaiKelembapan = $this->getNilaiKriteriaAngka($tanaman,$spkKelembapan, 'kelembapan');
             $nilaiKedalamanTanah = $this->getNilaiKriteriaAngka($tanaman,$spkKedalamanTanah, 'kedalaman_tanah');
             $nilaiLereng = $this->getNilaiKriteriaAngka($tanaman,$spkLereng, 'lereng');
@@ -186,6 +172,7 @@ class SpkController extends Controller
             $nilaiTanamans[$tanaman_id] = [
                 'nama' => $tanaman->name,
                 'suhu' => $nilaiSuhu,
+                'curah_hujan' => $nilaiCurahHujan,
                 'kelembapan'=> $nilaiKelembapan,
                 'drainase'=> $nilaiDrainase,
                 'tekstur'=> $nilaiTekstur,
@@ -197,7 +184,7 @@ class SpkController extends Controller
         }
         // dd($nilaiTanamans);
 
-        $arrayKriteria = ['suhu', 'kelembapan', 'drainase', 'tekstur', 'kedalaman_tanah', 'keasaman', 'lereng', 'bahaya_banjir'];
+        $arrayKriteria = ['suhu', 'curah_hujan', 'kelembapan', 'drainase', 'tekstur', 'kedalaman_tanah', 'keasaman', 'lereng', 'bahaya_banjir'];
 
         # inisialisasi array nilai maksimal kriteria
         $nilaiMaksimal = [];
@@ -258,34 +245,12 @@ class SpkController extends Controller
             foreach ($dataNilaiPembobotan as $namaKriteria => $nilaiPembobotan) {
                 // info($nilaiPembobotanTanamans[$key]['nama']);
                 if ($namaKriteria != 'nama') {
-                    // if($nilaiPembobotanTanamans[$key]['nama'] == 'Gandum'){
-
-                    //     info('total nilai sebelum: '.$nilaiTotalTanamans[$key]['nilai']);
-                    //     info('nilai : '.$nilaiPembobotan);
-                    // }                    
-                    // info($nilaiTotalTanamans);
                     $nilaiTotalTanamans[$key]['nilai'] =round($nilaiTotalTanamans[$key]['nilai'] + $nilaiPembobotan, 3);
-
-                    // info('total nilai sesudah: '.$nilaiTotalTanamans[$key]['nilai']);
-                    // info('======');
                 }
             }
         }
-        // info($nilaiTotalTanamans);
-        // usort($nilaiTotalTanamans, fn($a, $b) => $a['nilai'] <=> $b['nilai']);
-        array_multisort(array_column($nilaiTotalTanamans, "nilai"),SORT_DESC, $nilaiTotalTanamans);
 
-        // $dataNilai = [
-        //     'suhu'=> 3,
-        //     'kelembapan'=> 3,
-        //     'drainase'=> 3,
-        //     'tekstur'=> 3,
-        //     'kedalaman_tanah'=> 3,
-        //     'keasaman'=> 3,
-        //     'lereng'=> 3,
-        //     'bahaya_banjir'=> 3,
-        // ];
-        // info($this->arrayKriteria);
+        array_multisort(array_column($nilaiTotalTanamans, "nilai"),SORT_DESC, $nilaiTotalTanamans);
 
         // dd($spk);
 
@@ -319,6 +284,7 @@ class SpkController extends Controller
         $kriterias = Kriteria::all();
         $tanamans = Tanaman::all();
         $spkSuhu = $spk->suhu;
+        $spkCurahHujan = $spk->curah_hujan;
         $spkKelembapan = $spk->kelembapan;
         $spkDrainase = $spk->drainase;
         $spkKedalamanTanah = $spk->kedalaman_tanah;
@@ -338,6 +304,7 @@ class SpkController extends Controller
             // info('============');
             // info($tanaman->name);
             $nilaiSuhu = $this->getNilaiKriteriaAngka($tanaman,$spkSuhu,'suhu');
+            $nilaiCurahHujan = $this->getNilaiKriteriaAngka($tanaman,$spkCurahHujan,'curah_hujan');
             $nilaiKelembapan = $this->getNilaiKriteriaAngka($tanaman,$spkKelembapan, 'kelembapan');
             $nilaiKedalamanTanah = $this->getNilaiKriteriaAngka($tanaman,$spkKedalamanTanah, 'kedalaman_tanah');
             $nilaiLereng = $this->getNilaiKriteriaAngka($tanaman,$spkLereng, 'lereng');
@@ -350,6 +317,7 @@ class SpkController extends Controller
             $nilaiTanamans[$tanaman_id] = [
                 'nama' => $tanaman->name,
                 'suhu' => $nilaiSuhu,
+                'curah_hujan' => $nilaiCurahHujan,
                 'kelembapan'=> $nilaiKelembapan,
                 'drainase'=> $nilaiDrainase,
                 'tekstur'=> $nilaiTekstur,
@@ -361,7 +329,7 @@ class SpkController extends Controller
         }
         // dd($nilaiTanamans);
 
-        $arrayKriteria = ['suhu', 'kelembapan', 'drainase', 'tekstur', 'kedalaman_tanah', 'keasaman', 'lereng', 'bahaya_banjir'];
+        $arrayKriteria = ['suhu', 'curah_hujan', 'kelembapan', 'drainase', 'tekstur', 'kedalaman_tanah', 'keasaman', 'lereng', 'bahaya_banjir'];
 
         $nilaiMaksimal = [];
         foreach ($arrayKriteria as $value) {
@@ -399,11 +367,18 @@ class SpkController extends Controller
 
         $nilaiPembobotanTanamans = [];
         foreach ($nilaiNormalisaliTanamans as $key => $dataNilai) {
-            // $nilaiPembobotanTanamans[$key] = [];
-            $nilaiPembobotanTanamans[$key] = ['nama' => $dataNilai['nama']];
+            $totalZeroValue = 0;
+            $nilaiPembobotanTanamans[$key] = [
+                'nama' => $dataNilai['nama'],
+            ];
             foreach ($arrayKriteria as $namaKriteria) {
                 // info($namaKriteria);
                 $nilaiPembobotanTanamans[$key][$namaKriteria] = $dataNilai[$namaKriteria] * $this->arrayBobotKriteria[$namaKriteria]['bobot'] / 100;
+
+                if($nilaiPembobotanTanamans[$key][$namaKriteria] == 0) {
+                    $totalZeroValue = $totalZeroValue + 1;
+                }
+                $nilaiPembobotanTanamans[$key]['total_zero_value'] = $totalZeroValue;
             }
         }
         // info($nilaiPembobotanTanamans);
@@ -417,13 +392,19 @@ class SpkController extends Controller
             ];
             foreach ($dataNilai as $namaKriteria => $nilai) {
                 if ($namaKriteria != 'nama') {
-                    // info('nilai : '.$nilai);
-                    $nilaiTotalTanamans[$key]['nilai'] =round($nilaiTotalTanamans[$key]['nilai'] + $nilai, 2);
-                }
-                
-                
+                    if ($namaKriteria != 'total_zero_value') {
+                        // info('nilai : '.$nilai);
+                        $nilaiTotalTanamans[$key]['nilai'] =round($nilaiTotalTanamans[$key]['nilai'] + $nilai, 2);
+                    }
+                }  
+            }
+            if ($dataNilai['total_zero_value'] <= 2) {
+                $nilaiTotalTanamans[$key]['rekomendasi'] = true;
+            } else {
+                $nilaiTotalTanamans[$key]['rekomendasi'] = false;
             }
         }
+
         // info($nilaiTotalTanamans);
         // usort($nilaiTotalTanamans, fn($a, $b) => $a['nilai'] <=> $b['nilai']);
         array_multisort(array_column($nilaiTotalTanamans, "nilai"),SORT_DESC, $nilaiTotalTanamans);

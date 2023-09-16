@@ -2,11 +2,12 @@
     {{-- The best athlete wants his opponent at his best. --}}
     @include('my_components.alert-success')
 
-    <form wire:submit.prevent="store" class="mt-6 space-y-12">
-        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+    <form wire:submit.prevent="store" class="mt-2 space-y-12">
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 font-serif">
             <div >
                 <div>
-                    <x-input-label for="lahan" :value="__('Daerah')" />
+                    <x-input-label for="lahan" :value="__('Nama Daerah')" />
+                    <img class="object-none object-center py-2" src={{url('daerahiklim.jpeg')}}>
                     <select wire:model="selectedCity"
                         class="form-control block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                         @foreach ($cities as $city)
@@ -45,22 +46,6 @@
                     </select>
                     <x-input-error class="mt-2" :messages="$errors->get('name')" />
                 </div>
-                <div class="mt-6">
-                    <x-input-label for="kedalamanTanah" :value="__('Kedalaman tanah (cm)')" />
-                    <x-text-input type="text"
-                        class="form-control @error('kedalamanTanah') is-invalid @enderror block mt-1 w-full"
-                        wire:model="kedalamanTanah" />
-                    <x-input-error class="mt-2" :messages="$errors->get('kedalamanTanah')" />
-
-                </div>
-                <div class="mt-6">
-                    <x-input-label for="keasaman" :value="__('Keasaman')" />
-                    <x-text-input type="text"
-                        class="form-control @error('keasaman') is-invalid @enderror block mt-1 w-full"
-                        wire:model="keasaman" />
-                    <x-input-error class="mt-2" :messages="$errors->get('keasaman')" />
-
-                </div>
             </div>
             <div>
                 <div>
@@ -80,7 +65,20 @@
                         class="form-control @error('lereng') is-invalid @enderror block mt-1 w-full"
                         wire:model="lereng" />
                     <x-input-error class="mt-2" :messages="$errors->get('lereng')" />
-
+                </div>
+                <div class="mt-6">
+                    <x-input-label for="kedalamanTanah" :value="__('Kedalaman tanah (cm)')" />
+                    <x-text-input type="text"
+                        class="form-control @error('kedalamanTanah') is-invalid @enderror block mt-1 w-full"
+                        wire:model="kedalamanTanah" />
+                    <x-input-error class="mt-2" :messages="$errors->get('kedalamanTanah')" />
+                </div>
+                <div class="mt-6">
+                    <x-input-label for="keasaman" :value="__('Keasaman')" />
+                    <x-text-input type="text"
+                        class="form-control @error('keasaman') is-invalid @enderror block mt-1 w-full"
+                        wire:model="keasaman" />
+                    <x-input-error class="mt-2" :messages="$errors->get('keasaman')" />
                 </div>
                 <div class="mt-6">
                     <x-input-label for="name" :value="__('Kedalaman Banjir')" />

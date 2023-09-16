@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('input_data', function (Blueprint $table) {
             $table->id();
+            // $table->float('cities')->default('');
             $table->float('suhu')->default(0);
             $table->float('curah_hujan')->default(0);
             $table->float('kelembapan')->default(0);

@@ -50,7 +50,7 @@ class KriteriaSeeder extends Seeder
         ],
         [
             'name' => 'Kedalaman tanah',
-            'bobot' => 10,
+            'bobot' => 7,
             'type_data' => 'angka',
             'lambang' => 'cm',
             'col_name' => 'kedalaman_tanah',
@@ -82,7 +82,7 @@ class KriteriaSeeder extends Seeder
         ],
         [
             'name' => 'Bahaya Banjir',
-            'bobot' => 5,
+            'bobot' => 8,
             'type_data' => 'pilihan2',
             'lambang' => '',
             'col_name' => 'bahaya_banjir',
